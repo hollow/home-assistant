@@ -1,0 +1,33 @@
+script:
+  kitchen_zwave_config:
+    alias: Kitchen Z-Wave Config Script
+    sequence:
+      # Kitchen
+      - service: script.zwave_config_fibaro_fgms001
+        entity_id: binary_sensor.kitchen_motion
+        data:
+          delay: 300
+
+      # Kitchen Ceiling Light
+      - service: script.zwave_config_fibaro_fgs223
+        entity_id: switch.kitchen_back_light
+
+      # Kitchen Dishwasher
+      - service: script.zwave_config_fibaro_fgwp102
+        entity_id: switch.kitchen_dishwasher
+
+      # Kitchen Fridge
+      - service: script.zwave_config_aeotec_zw175
+        entity_id: switch.kitchen_fridge
+
+      # Kitchen Fume Light
+      - service: script.zwave_config_fibaro_fgwp102
+        entity_id: switch.kitchen_fume_light
+
+      # Kitchen Oven
+      - service: script.zwave_config_qubino_zmnhydx
+        entity_id: switch.kitchen_oven
+
+      # Kitchen Vacuum
+      - service: script.zwave_config_fibaro_fgwp102
+        entity_id: switch.kitchen_vacuum

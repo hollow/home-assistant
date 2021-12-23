@@ -1,0 +1,19 @@
+group:
+  kids_lights:
+    name: Kids Lights
+    entities:
+      - light.kids
+
+sensor:
+  - platform: powercalc
+    name: Kids Light
+    entity_id: light.kids
+
+automation:
+  - alias: Kids Light Controller
+    id: kids_light_controller
+    use_blueprint:
+      path: entity_controller.yaml
+      input:
+        sensor_entity: group.kids_presence
+        control_entity: group.kids_lights

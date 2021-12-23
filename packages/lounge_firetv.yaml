@@ -1,0 +1,128 @@
+media_player:
+  - name: Lounge FireTV
+    platform: androidtv
+    host: 10.0.0.82
+    scan_interval: 3
+    screencap: false
+    exclude_unnamed_apps: true
+    apps:
+      com.amazon.tv.launcher: Home
+      com.amazon.firetv.youtube: YouTube
+      de.swr.ard.avp.mobile.android.amazon: ARD
+      com.zdf.android.mediathek: ZDF
+      com.mediathek_3sat.android: 3sat
+      tv.arte.plus7: arte
+      com.disney.disneyplus: Disney+
+    state_detection_rules:
+      com.amazon.firetv.youtube:
+        - playing:
+            wake_lock_size: 4
+        - playing:
+            wake_lock_size: 3
+        - paused:
+            wake_lock_size: 2
+        - paused:
+            wake_lock_size: 1
+        - idle
+      de.swr.ard.avp.mobile.android.amazon:
+        - playing:
+            media_session_state: 3
+        - paused:
+            media_session_state: 2
+        - idle
+      com.zdf.android.mediathek:
+        - playing:
+            media_session_state: 3
+        - paused:
+            media_session_state: 2
+        - idle
+      com.mediathek_3sat.android:
+        - playing:
+            wake_lock_size: 4
+        - paused:
+            wake_lock_size: 3
+        - paused:
+            wake_lock_size: 2
+        - paused:
+            wake_lock_size: 1
+        - idle
+      tv.arte.plus7:
+        - playing:
+            media_session_state: 3
+        - paused:
+            media_session_state: 2
+        - idle
+      com.disney.disneyplus:
+        - playing:
+            media_session_state: 3
+        - paused:
+            media_session_state: 2
+        - idle
+
+sensor:
+  - platform: powercalc
+    entity_id: media_player.lounge_firetv
+    fixed:
+      power: 2.0
+
+template:
+  - binary_sensor:
+      - name: Lounge FireTV
+        unique_id: lounge_firetv
+        state: "{{ states('media_player.lounge_firetv') not in ['off', 'unknown', 'unavailable'] }}"
+
+automation:
+  - alias: Lounge FireTV AV Volume
+    id: lounge_firetv_av_volume
+    mode: restart
+    trigger:
+      - platform: state
+        entity_id: select.lounge_av_source
+        to: FireTV
+    action:
+      - service: media_player.volume_set
+        entity_id: media_player.lounge_av
+        data:
+          volume_level: 0.30
+
+  - alias: Lounge FireTV Configuration
+    id: lounge_firetv_configuration
+    mode: restart
+    trigger: []
+    action:
+      - service: androidtv.adb_command
+        entity_id: media_player.lounge_firetv
+        data:
+          command: settings put system screen_off_timeout 2147460000
+      - service: androidtv.adb_command
+        entity_id: media_player.lounge_firetv
+        data:
+          command: settings put system screen_off_timeout 900000
+
+  - alias: Lounge FireTV Turn Off
+    id: lounge_firetv_turn_off
+    mode: restart
+    trigger:
+      - platform: state
+        entity_id: select.lounge_av_source
+        from: FireTV
+    action:
+      - service: androidtv.adb_command
+        entity_id: media_player.lounge_firetv
+        data:
+          command: HOME
+      - service: media_player.turn_off
+        entity_id: media_player.lounge_firetv
+
+  - alias: Lounge FireTV Turned On
+    id: lounge_firetv_turned_on
+    mode: restart
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.lounge_firetv
+        to: 'on'
+    action:
+      - service: select.select_option
+        entity_id: select.lounge_av_source
+        data:
+          option: FireTV

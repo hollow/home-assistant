@@ -1,0 +1,14 @@
+template:
+  - binary_sensor:
+      - name: Bathroom Sonos
+        unique_id: bathroom_sonos
+        state: "{{ is_state('media_player.bathroom_sonos', 'playing') }}"
+
+sensor:
+  - platform: powercalc
+    entity_id: media_player.bathroom_sonos
+    fixed:
+      states_power:
+        playing: 6.0
+        paused: 3.5
+        idle: 3.5

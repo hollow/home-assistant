@@ -1,0 +1,67 @@
+blueprint:
+  name: Light Sunrise
+  description: Simulate sunrise
+  domain: script
+
+  input:
+    entity:
+      name: Light Entity
+      selector:
+        entity:
+          domain: light
+
+    duration:
+      name: Duration
+      selector:
+        number:
+          min: 1
+          max: 60
+          unit_of_measurement: min
+
+mode: restart
+
+variables:
+  entity: !input entity
+  duration: !input duration
+  transition: '{{ duration * 60 / 3 }}'
+
+sequence:
+  - service: light.turn_on
+    entity_id: !input entity
+    data:
+      xy_color: [0.67, 0.39]
+      brightness: 1
+  - delay: 1
+
+  - service: light.turn_on
+    entity_id: !input entity
+    data:
+      xy_color: [0.65, 0.41]
+      brightness: 85
+    data_template:
+      transition: '{{ transition }}'
+  - delay: '{{ transition }}'
+
+  - service: light.turn_on
+    entity_id: !input entity
+    data:
+      xy_color: [0.60, 0.40]
+      brightness: 170
+    data_template:
+      transition: '{{ transition }}'
+  - delay: '{{ transition }}'
+
+  - service: light.turn_on
+    entity_id: !input entity
+    data:
+      xy_color: [0.457, 0.41]
+      brightness: 255
+    data_template:
+      transition: '{{ transition }}'
+  - delay: '{{ transition }}'
+
+  - service: light.turn_on
+    entity_id: !input entity
+    data:
+      color_temp: 366
+      brightness: 255

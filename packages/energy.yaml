@@ -1,0 +1,6 @@
+template:
+  - sensor:
+      - name: Grid Energy Price
+        unique_id: grid_energy_price
+        unit_of_measurement: EUR/kWh
+        state: 0.2616

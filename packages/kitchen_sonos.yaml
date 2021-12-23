@@ -1,0 +1,14 @@
+template:
+  - binary_sensor:
+      - name: Kitchen Sonos
+        unique_id: kitchen_sonos
+        state: "{{ is_state('media_player.kitchen_sonos', 'playing') }}"
+
+sensor:
+  - platform: powercalc
+    entity_id: media_player.kitchen_sonos
+    fixed:
+      states_power:
+        playing: 6.0
+        paused: 3.5
+        idle: 3.5

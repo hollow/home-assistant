@@ -1,0 +1,23 @@
+script:
+  entrance_zwave_config:
+    alias: Entrance Z-Wave Config Script
+    sequence:
+      # Entrance Back
+      - service: script.zwave_config_fibaro_fgms001
+        entity_id: binary_sensor.entrance_back_motion
+
+      # Entrance Door
+      - service: script.zwave_config_fibaro_fgdw002
+        entity_id: binary_sensor.entrance_door
+
+      # Entrance Front
+      - service: script.zwave_config_fibaro_fgms001
+        entity_id: binary_sensor.entrance_front_motion
+
+      # Entrance Kitchen
+      - service: script.zwave_config_fibaro_fgms001
+        entity_id: binary_sensor.entrance_kitchen_motion
+
+      # Entrance Middle
+      - service: script.zwave_config_fibaro_fgms001
+        entity_id: binary_sensor.entrance_middle_motion

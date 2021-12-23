@@ -1,0 +1,12 @@
+template:
+  - binary_sensor:
+      - name: Lounge Remote
+        unique_id: lounge_remote
+        state: 'on'
+        auto_off: 30
+    trigger:
+      - platform: event
+        event_type: zha_event
+        event_data:
+          device_ieee: '00:17:88:01:04:ae:f3:37'
+          endpoint_id: 2

@@ -1,0 +1,6 @@
+group:
+  casino_presence:
+    name: Casino Presence
+    entities:
+      - binary_sensor.casino_motion
+      - binary_sensor.casino_remote

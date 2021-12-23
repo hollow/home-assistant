@@ -1,0 +1,7 @@
+group:
+  laeticia_presence:
+    name: Laeticia Presence
+    entities:
+      - binary_sensor.laeticia_motion
+      - binary_sensor.laeticia_remote
+      - binary_sensor.laeticia_sonos

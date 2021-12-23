@@ -1,0 +1,10 @@
+template:
+  - binary_sensor:
+      - name: WC Door Opening
+        unique_id: wc_door_opening
+        state: 'on'
+        auto_off: 30
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.wc_door
+        to: 'on'

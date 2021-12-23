@@ -1,0 +1,100 @@
+binary_sensor.*_av:
+  device_class: running
+  icon: mdi:audio-video
+
+binary_sensor.*_battery:
+  device_class: battery
+
+binary_sensor.*_connectivity:
+  device_class: connectivity
+
+binary_sensor.*_desk:
+  icon: mdi:desktop-mac
+
+binary_sensor.*_door:
+  device_class: door
+
+binary_sensor.*_door_opening:
+  device_class: door
+
+binary_sensor.*_firetv:
+  device_class: running
+  icon: mdi:cast
+
+binary_sensor.*_motion:
+  device_class: motion
+
+binary_sensor.*_presence:
+  device_class: motion
+
+binary_sensor.*_remote:
+  icon: mdi:remote
+
+binary_sensor.*_shower:
+  device_class: moisture
+  icon: mdi:shower
+
+binary_sensor.*_sonos:
+  device_class: running
+  icon: mdi:cast-audio
+
+binary_sensor.*_tv:
+  device_class: running
+  icon: mdi:television
+
+binary_sensor.*_window:
+  device_class: window
+
+climate.*_thermostat:
+  icon: mdi:radiator
+
+device_tracker.*_phone:
+  icon: mdi:cellphone
+
+group.*_lights:
+  icon: mdi:lightbulb-group
+
+group.*_presence:
+  icon: mdi:location-enter
+
+media_player.*_av:
+  icon: mdi:audio-video
+
+media_player.*_sonos:
+  icon: mdi:cast-audio
+
+media_player.*_tv:
+  icon: mdi:television
+
+sensor.*_battery_level:
+  device_class: battery
+
+sensor.*_energy:
+  device_class: energy
+  icon: mdi:counter
+
+sensor.*_eta:
+  device_class: timestamp
+  icon: mdi:timer-sand
+
+sensor.*_humidity:
+  device_class: humidity
+  icon: mdi:water-percent
+
+sensor.*_illuminance:
+  device_class: illuminance
+  icon: mdi:weather-sunny
+
+sensor.*_power:
+  device_class: power
+  icon: mdi:gauge
+
+sensor.*_progress:
+  icon: mdi:percent
+
+sensor.*_temperature:
+  device_class: temperature
+  icon: mdi:thermometer
+
+switch.*_light:
+  icon: mdi:lightbulb

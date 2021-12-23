@@ -1,0 +1,65 @@
+group:
+  bedroom_lights:
+    name: Bedroom Lights
+    entities:
+      - light.bedroom_bed
+      - light.bedroom_ceiling
+
+adaptive_lighting:
+  - name: Bedroom
+    lights: group.bedroom_lights
+    min_brightness: 33
+
+sensor:
+  - platform: powercalc
+    name: Bedroom Bed Light
+    entity_id: light.bedroom_bed
+
+  - platform: powercalc
+    name: Bedroom Ceiling Light
+    entity_id: light.bedroom_ceiling
+    linear:
+      min_power: 0.5
+      max_power: 27.0
+
+script:
+  bedroom_bed_light_sunrise:
+    alias: Bedroom Bed Light Sunrise
+    use_blueprint:
+      path: light_sunrise.yaml
+      input:
+        entity: light.bedroom_bed
+        duration: 15
+
+  bedroom_bed_light_sunset:
+    alias: Bedroom Bed Light Sunset
+    use_blueprint:
+      path: light_sunset.yaml
+      input:
+        entity: light.bedroom_bed
+        duration: 15
+
+  bedroom_ceiling_light_sunrise:
+    alias: Bedroom Ceiling Light Sunrise
+    use_blueprint:
+      path: light_sunrise.yaml
+      input:
+        entity: light.bedroom_ceiling
+        duration: 15
+
+  bedroom_ceiling_light_sunset:
+    alias: Bedroom Ceiling Light Sunset
+    use_blueprint:
+      path: light_sunset.yaml
+      input:
+        entity: light.bedroom_ceiling
+        duration: 15
+
+automation:
+  - alias: Bedroom Light Controller
+    id: bedroom_light_controller
+    use_blueprint:
+      path: entity_controller.yaml
+      input:
+        sensor_entity: group.bedroom_presence
+        control_entity: group.bedroom_lights

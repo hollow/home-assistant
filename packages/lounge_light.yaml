@@ -1,0 +1,91 @@
+group:
+  lounge_lights:
+    name: Lounge Lights
+    entities:
+      - light.lounge_back
+      - light.lounge_ceiling
+      - switch.lounge_glitter
+      - light.lounge_tv
+
+adaptive_lighting:
+  - name: Lounge Ambient
+    lights:
+      - light.lounge_back
+      - light.lounge_tv
+    min_brightness: 75
+
+  - name: Lounge Ceiling
+    lights:
+      - light.lounge_ceiling
+
+sensor:
+  - platform: powercalc
+    name: Lounge Back Light
+    entity_id: light.lounge_back
+    linear:
+      calibrate:
+        - 1 -> 0.3
+        - 100 -> 0.8
+        - 150 -> 2.1
+        - 150 -> 2.1
+        - 200 -> 7.1
+        - 210 -> 9.3
+        - 220 -> 12.1
+        - 230 -> 15.8
+        - 240 -> 20.7
+        - 250 -> 27.2
+        - 255 -> 30.3
+
+  - platform: powercalc
+    name: Lounge Ceiling Light
+    entity_id: light.lounge_ceiling
+    linear:
+      min_power: 0.5
+      max_power: 24.5
+
+  - platform: powercalc
+    name: Lounge TV Light
+    entity_id: light.lounge_tv
+    linear:
+      calibrate:
+        - 1 -> 0.3
+        - 200 -> 3.8
+        - 210 -> 5.0
+        - 220 -> 6.3
+        - 230 -> 8.2
+        - 240 -> 10.7
+        - 250 -> 13.9
+        - 255 -> 15.5
+
+automation:
+  - alias: Lounge Back Light Controller
+    id: lounge_back_light_controller
+    use_blueprint:
+      path: entity_controller.yaml
+      input:
+        sensor_entity: group.lounge_presence
+        control_entity: light.lounge_back
+
+  - alias: Lounge Ceiling Light Controller
+    id: lounge_ceiling_light_controller
+    use_blueprint:
+      path: entity_controller.yaml
+      input:
+        sensor_entity: group.lounge_presence
+        control_entity: light.lounge_ceiling
+
+  - alias: Lounge Glitter Light Controller
+    id: lounge_glitter_light_controller
+    use_blueprint:
+      path: entity_controller.yaml
+      input:
+        sensor_entity: group.lounge_presence
+        control_entity: light.lounge_glitter
+
+  - alias: Lounge TV Light Controller
+    id: lounge_tv_light_controller
+    use_blueprint:
+      path: entity_controller.yaml
+      input:
+        sensor_entity: group.lounge_presence
+        control_entity: light.lounge_tv

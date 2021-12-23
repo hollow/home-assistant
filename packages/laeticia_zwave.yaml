@@ -1,0 +1,17 @@
+script:
+  laeticia_zwave_config:
+    alias: Laeticia Z-Wave Config Script
+    sequence:
+      # Laeticia
+      - service: script.zwave_config_fibaro_fgms001
+        entity_id: binary_sensor.laeticia_motion
+        data:
+          delay: 300
+
+      # Laeticia Large Window
+      - service: script.zwave_config_fibaro_fgdw002
+        entity_id: binary_sensor.laeticia_large_window
+
+      # Laeticia Small Window
+      - service: script.zwave_config_fibaro_fgdw002
+        entity_id: binary_sensor.laeticia_small_window

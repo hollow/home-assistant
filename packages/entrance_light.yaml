@@ -1,0 +1,88 @@
+group:
+  entrance_lights:
+    name: Entrance Lights
+    entities:
+      - light.entrance_back
+      - light.entrance_front
+      - light.entrance_kitchen
+      - light.entrance_middle
+      - light.entrance_stairs
+
+adaptive_lighting:
+  - name: Entrance
+    lights: group.entrance_lights
+    min_brightness: 33
+
+sensor:
+  - platform: powercalc
+    name: Entrance Back Light
+    entity_id: light.entrance_back
+    linear:
+      min_power: 0.5
+      max_power: 27.0
+
+  - platform: powercalc
+    name: Entrance Front Light
+    entity_id: light.entrance_front
+    linear:
+      min_power: 0.5
+      max_power: 27.0
+
+  - platform: powercalc
+    name: Entrance Kitchen Light
+    entity_id: light.entrance_kitchen
+    linear:
+      min_power: 0.5
+      max_power: 27.0
+
+  - platform: powercalc
+    name: Entrance Middle Light
+    entity_id: light.entrance_middle
+    linear:
+      min_power: 0.5
+      max_power: 27.0
+
+  - platform: powercalc
+    name: Entrance Stairs Light
+    entity_id: light.entrance_stairs
+
+automation:
+  - alias: Entrance Back Light Controller
+    id: entrance_back_light_controller
+    use_blueprint:
+      path: entity_controller.yaml
+      input:
+        sensor_entity: group.entrance_back_presence
+        control_entity: light.entrance_back
+
+  - alias: Entrance Front Light Controller
+    id: entrance_front_light_controller
+    use_blueprint:
+      path: entity_controller.yaml
+      input:
+        sensor_entity: group.entrance_front_presence
+        control_entity: light.entrance_front
+
+  - alias: Entrance Kitchen Light Controller
+    id: entrance_kitchen_light_controller
+    use_blueprint:
+      path: entity_controller.yaml
+      input:
+        sensor_entity: group.entrance_kitchen_presence
+        control_entity: light.entrance_kitchen
+
+  - alias: Entrance Middle Light Controller
+    id: entrance_middle_light_controller
+    use_blueprint:
+      path: entity_controller.yaml
+      input:
+        sensor_entity: group.entrance_middle_presence
+        control_entity: light.entrance_middle
+
+  - alias: Entrance Stairs Light Controller
+    id: entrance_stairs_light_controller
+    use_blueprint:
+      path: entity_controller.yaml
+      input:
+        sensor_entity: group.entrance_stairs_presence
+        control_entity: light.entrance_stairs

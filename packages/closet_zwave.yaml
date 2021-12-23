@@ -1,0 +1,21 @@
+script:
+  closet_zwave_config:
+    alias: Closet Z-Wave Config Script
+    sequence:
+      # Closet
+      - service: script.zwave_config_fibaro_fgms001
+        entity_id: binary_sensor.closet_motion
+        data:
+          delay: 300
+
+      # Closet Dryer
+      - service: script.zwave_config_qubino_zmnhydx
+        entity_id: switch.closet_dryer
+
+      # Closet Washer
+      - service: script.zwave_config_qubino_zmnhydx
+        entity_id: switch.closet_washer
+
+      # Closet Window
+      - service: script.zwave_config_fibaro_fgdw002
+        entity_id: binary_sensor.closet_window

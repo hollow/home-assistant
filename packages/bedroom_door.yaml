@@ -1,0 +1,10 @@
+template:
+  - binary_sensor:
+      - name: Bedroom Door Opening
+        unique_id: bedroom_door_opening
+        state: 'on'
+        auto_off: 30
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.bedroom_door
+        to: 'on'

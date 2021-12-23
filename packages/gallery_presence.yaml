@@ -1,0 +1,26 @@
+group:
+  gallery_presence:
+    name: Gallery Presence
+    entities:
+      - group.gallery_kids_presence
+      - group.gallery_playground_presence
+      - group.gallery_stairs_presence
+
+  gallery_kids_presence:
+    name: Gallery Kids Presence
+    entities:
+      - binary_sensor.gallery_kids_motion
+      - group.kids_presence
+
+  gallery_playground_presence:
+    name: Gallery Playground Presence
+    entities:
+      - binary_sensor.gallery_closet_motion
+      - binary_sensor.gallery_playground_motion
+
+  gallery_stairs_presence:
+    name: Gallery Stairs Presence
+    entities:
+      - binary_sensor.gallery_closet_motion
+      - binary_sensor.gallery_stairs_motion
+      - group.closet_presence

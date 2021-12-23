@@ -1,0 +1,58 @@
+default_config:
+
+# automation: !include automations.yaml
+# group: !include groups.yaml
+# script: !include scripts.yaml
+# scene: !include scenes.yaml
+
+homeassistant:
+  packages: !include_dir_named packages
+  customize_glob: !include customize.yaml
+
+home_connect:
+  client_id: !secret home_connect_id
+  client_secret: !secret home_connect_secret
+
+homematic:
+  interfaces:
+    ip:
+      host: !secret homematic_host
+      port: 2010
+      username: !secret homematic_username
+      password: !secret homematic_password
+      resolvenames: json
+    groups:
+      host: !secret homematic_host
+      port: 9292
+      username: !secret homematic_username
+      password: !secret homematic_password
+      resolvenames: json
+      path: /groups
+
+http:
+  use_x_forwarded_for: true
+  trusted_proxies: [127.0.0.1]
+
+logger:
+  default: warning
+  filters:
+    homeassistant.components.media_player:
+      - 'Setup of media_player platform onkyo is taking over'
+      - 'Updating onkyo media_player took longer than the scheduled update interval'
+    homeassistant.components.onkyo.media_player:
+      - 'Unable to connect to receiver'
+    homeassistant.helpers.entity:
+      - 'dwd_weather.*device_state_attributes'
+    homeassistant.setup:
+      - 'Setup of homematic is taking over'
+
+powercalc:
+  energy_sensor_naming: '{} Energy'
+  power_sensor_naming: '{} Power'
+
+recorder:
+  db_url: !secret postgres_url
+
+tts:
+  - platform: google_translate
+    language: de

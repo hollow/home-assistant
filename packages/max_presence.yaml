@@ -1,0 +1,7 @@
+group:
+  max_presence:
+    name: Max Presence
+    entities:
+      - binary_sensor.max_motion
+      - binary_sensor.max_remote
+      - binary_sensor.max_sonos

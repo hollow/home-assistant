@@ -1,0 +1,16 @@
+template:
+  - sensor:
+      - name: Lounge Thermostat Temperature
+        unique_id: lounge_thermostat_temperature
+        device_class: temperature
+        state_class: measurement
+        unit_of_measurement: °C
+        state: "{{ state_attr('climate.lounge', 'current_temperature') }}"
+
+  - sensor:
+      - name: Lounge Temperature
+        unique_id: lounge_temperature
+        device_class: temperature
+        state_class: measurement
+        unit_of_measurement: °C
+        state: "{{ states('sensor.lounge_front_temperature') }}"

@@ -1,0 +1,31 @@
+automation:
+  - alias: Lounge TV Turn On
+    id: lounge_tv_turn_on
+    mode: restart
+    trigger:
+      - platform: state
+        entity_id: select.lounge_av_source
+        to:
+          - FireTV
+          - Switch
+          - Xbox
+          - SNES
+          - PC
+          - AUX
+    action:
+      - service: media_player.turn_on
+        entity_id: media_player.lounge_tv
+
+  - alias: Lounge TV Turn Off
+    id: lounge_tv_turn_off
+    mode: restart
+    trigger:
+      - platform: state
+        entity_id: select.lounge_av_source
+        to:
+          - 'off'
+          - Sonos
+          - Traktor S5
+    action:
+      - service: media_player.turn_off
+        entity_id: media_player.lounge_tv

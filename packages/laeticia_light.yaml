@@ -1,0 +1,65 @@
+group:
+  laeticia_lights:
+    name: Laeticia Lights
+    entities:
+      - light.laeticia_ceiling
+      - light.laeticia_speaker
+
+adaptive_lighting:
+  - name: Laeticia
+    lights: group.laeticia_lights
+    min_brightness: 33
+
+sensor:
+  - platform: powercalc
+    name: Laeticia Ceiling Light
+    entity_id: light.laeticia_ceiling
+
+  - platform: powercalc
+    name: Laeticia Speaker Light
+    entity_id: light.laeticia_speaker
+    linear:
+      min_power: 0.5
+      max_power: 5.3
+
+script:
+  laeticia_ceiling_light_sunrise:
+    alias: Laeticia Ceiling Light Sunrise
+    use_blueprint:
+      path: light_sunrise.yaml
+      input:
+        entity: light.laeticia_ceiling
+        duration: 15
+
+  laeticia_ceiling_light_sunset:
+    alias: Laeticia Ceiling Light Sunset
+    use_blueprint:
+      path: light_sunset.yaml
+      input:
+        entity: light.laeticia_ceiling
+        duration: 30
+
+  laeticia_speaker_light_sunrise:
+    alias: Laeticia Speaker Light Sunrise
+    use_blueprint:
+      path: light_sunrise.yaml
+      input:
+        entity: light.laeticia_speaker
+        duration: 15
+
+  laeticia_speaker_light_sunset:
+    alias: Laeticia Speaker Light Sunset
+    use_blueprint:
+      path: light_sunset.yaml
+      input:
+        entity: light.laeticia_speaker
+        duration: 30
+
+automation:
+  - alias: Laeticia Light Controller
+    id: laeticia_light_controller
+    use_blueprint:
+      path: entity_controller.yaml
+      input:
+        sensor_entity: group.laeticia_presence
+        control_entity: group.laeticia_lights

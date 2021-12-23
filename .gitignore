@@ -1,0 +1,7 @@
+.env
+.storage/
+*.bak
+*.db*
+*.log*
+backup/
+secrets.yaml

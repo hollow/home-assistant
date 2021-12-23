@@ -1,0 +1,7 @@
+group:
+  kids_presence:
+    name: Kids Presence
+    entities:
+      - binary_sensor.gallery_kids_motion
+      - binary_sensor.kids_motion
+      - binary_sensor.kids_shower

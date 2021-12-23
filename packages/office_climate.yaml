@@ -1,0 +1,16 @@
+template:
+  - sensor:
+      - name: Office Thermostat Temperature
+        unique_id: office_thermostat_temperature
+        device_class: temperature
+        state_class: measurement
+        unit_of_measurement: °C
+        state: "{{ state_attr('climate.office', 'current_temperature') }}"
+
+  - sensor:
+      - name: Office Temperature
+        unique_id: office_temperature
+        device_class: temperature
+        state_class: measurement
+        unit_of_measurement: °C
+        state: "{{ states('sensor.office_bene_temperature') }}"

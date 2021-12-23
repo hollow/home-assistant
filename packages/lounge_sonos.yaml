@@ -1,0 +1,55 @@
+template:
+  - binary_sensor:
+      - name: Lounge Sonos
+        unique_id: lounge_sonos
+        state: "{{ is_state('media_player.lounge_sonos', 'playing') }}"
+
+sensor:
+  - platform: powercalc
+    entity_id: media_player.lounge_sonos
+    fixed:
+      power: 3.5
+
+automation:
+  - alias: Lounge Sonos AV Volume
+    id: lounge_sonos_av_volume
+    mode: restart
+    trigger:
+      - platform: state
+        entity_id: select.lounge_av_source
+        to: Sonos
+    action:
+      - service: media_player.volume_set
+        entity_id: media_player.lounge_av
+        data:
+          volume_level: 0.82
+
+  - alias: Lounge Sonos Turn Off
+    id: lounge_sonos_turn_off
+    mode: restart
+    trigger:
+      - platform: state
+        entity_id: select.lounge_av_source
+        from: Sonos
+    action:
+      - service: sonos.unjoin
+        entity_id: media_player.lounge_sonos
+      - service: media_player.media_pause
+        entity_id: media_player.lounge_sonos
+      - service: media_player.volume_set
+        entity_id: media_player.lounge_sonos
+        data:
+          volume_level: 0.1
+
+  - alias: Lounge Sonos Turned On
+    id: lounge_sonos_turned_on
+    mode: restart
+    trigger:
+      - platform: state
+        entity_id: media_player.lounge_sonos
+        to: playing
+    action:
+      - service: select.select_option
+        entity_id: select.lounge_av_source
+        data:
+          option: Sonos

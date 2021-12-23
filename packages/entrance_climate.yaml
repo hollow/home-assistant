@@ -1,0 +1,16 @@
+template:
+  - sensor:
+      - name: Entrance Thermostat Temperature
+        unique_id: entrance_thermostat_temperature
+        device_class: temperature
+        state_class: measurement
+        unit_of_measurement: °C
+        state: "{{ state_attr('climate.entrance', 'current_temperature') }}"
+
+  - sensor:
+      - name: Entrance Temperature
+        unique_id: entrance_temperature
+        device_class: temperature
+        state_class: measurement
+        unit_of_measurement: °C
+        state: "{{ states('sensor.entrance_front_temperature') }}"

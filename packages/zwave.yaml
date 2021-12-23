@@ -1,0 +1,316 @@
+script:
+  zwave_config_aeotec_zw100:
+    alias: 'Z-Wave Configuration for Aeotec Multi Sensor 6 (ZW100)'
+    variables:
+      delay: 30
+    sequence:
+      - service: zwave_js.set_config_parameter
+        target:
+          entity_id: '{{ entity_id }}'
+        data:
+          parameter: 'PIR Sensor Timeout'
+          value: '{{ delay }}'
+
+      - service: zwave_js.set_config_parameter
+        target:
+          entity_id: '{{ entity_id }}'
+        data:
+          parameter: 'Motion Sensor Report Type to Send'
+          value: 'Binary Sensor CC Report'
+
+      - service: zwave_js.set_config_parameter
+        target:
+          entity_id: '{{ entity_id }}'
+        data:
+          parameter: 'Selective Reporting'
+          value: 1
+
+      - service: zwave_js.set_config_parameter
+        target:
+          entity_id: '{{ entity_id }}'
+        data:
+          parameter: 'Temperature Change Threshold'
+          value: 10
+
+      - service: zwave_js.set_config_parameter
+        target:
+          entity_id: '{{ entity_id }}'
+        data:
+          parameter: 'Humidity Change Threshold'
+          value: 1
+
+      - service: zwave_js.set_config_parameter
+        target:
+          entity_id: '{{ entity_id }}'
+        data:
+          parameter: 'Luminance Change Threshold'
+          value: 10
+
+      - service: zwave_js.set_config_parameter
+        target:
+          entity_id: '{{ entity_id }}'
+        data:
+          parameter: 'LED Blinking'
+          value: 1
+
+  zwave_config_aeotec_zw175:
+    alias: 'Z-Wave Configuration for Aeotec Smart Switch 7 (ZW175)'
+    variables:
+      report_interval: 600
+    sequence:
+      - service: zwave_js.set_config_parameter
+        target:
+          entity_id: '{{ entity_id }}'
+        data:
+          parameter: 'Report Type To Send'
+          value: 'Binary Switch CC Report'
+
+      - service: zwave_js.set_config_parameter
+        target:
+          entity_id: '{{ entity_id }}'
+        data:
+          parameter: 'LED Indicator'
+          value: 'Disable'
+
+      - service: zwave_js.set_config_parameter
+        target:
+          entity_id: '{{ entity_id }}'
+        data:
+          parameter: 'Automatic Reporting Interval'
+          value: '{{ report_interval }}'
+
+      - service: zwave_js.set_config_parameter
+        target:
+          entity_id: '{{ entity_id }}'
+        data:
+          parameter: 'Automatic Report: Voltage'
+          value: 0
+
+      - service: zwave_js.set_config_parameter
+        target:
+          entity_id: '{{ entity_id }}'
+        data:
+          parameter: 'Automatic Report: Current'
+          value: 0
+
+  zwave_config_fibaro_fgdw002:
+    alias: 'Z-Wave Configuration for Fibaro Door/Window (FGDW002)'
+    sequence:
+
+      - service: zwave_js.set_config_parameter
+        target:
+          entity_id: '{{ entity_id }}'
+        data:
+          parameter: 'Interval of temperature measurements'
+          value: 300
+
+  zwave_config_fibaro_fgms001:
+    alias: 'Z-Wave Configuration for Fibaro (FGMS001)'
+    variables:
+      delay: 30
+    sequence:
+      - service: zwave_js.set_config_parameter
+        target:
+          entity_id: '{{ entity_id }}'
+        data:
+          parameter: 'Motion detection - pulse counter'
+          value: '1 pulse'
+
+      - service: zwave_js.set_config_parameter
+        target:
+          entity_id: '{{ entity_id }}'
+        data:
+          parameter: 'Motion detection - alarm cancellation delay'
+          value: '{{ delay }}'
+
+      - service: zwave_js.set_config_parameter
+        target:
+          entity_id: '{{ entity_id }}'
+        data:
+          parameter: 'Illuminance report - threshold'
+          value: 10
+
+      - service: zwave_js.set_config_parameter
+        target:
+          entity_id: '{{ entity_id }}'
+        data:
+          parameter: 'Illuminance report - interval'
+          value: 0
+
+      - service: zwave_js.set_config_parameter
+        target:
+          entity_id: '{{ entity_id }}'
+        data:
+          parameter: 'Temperature report - threshold'
+          value: 1
+
+      - service: zwave_js.set_config_parameter
+        target:
+          entity_id: '{{ entity_id }}'
+        data:
+          parameter: 'Temperature measuring - interval'
+          value: 300
+
+      - service: zwave_js.set_config_parameter
+        target:
+          entity_id: '{{ entity_id }}'
+        data:
+          parameter: 'Temperature report - interval'
+          value: 0
+
+      - service: zwave_js.set_config_parameter
+        target:
+          entity_id: '{{ entity_id }}'
+        data:
+          parameter: 'LED - signalling mode'
+          value: 'LED inactive.'
+
+  zwave_config_fibaro_fgs213:
+    alias: 'Z-Wave Configuration for Fibaro Switch (FGS213)'
+    variables:
+      power_threshold: 15
+      report_interval: 600
+    sequence:
+      - service: zwave_js.set_config_parameter
+        target:
+          entity_id: '{{ entity_id }}'
+        data:
+          parameter: 'Active power reports'
+          value: '{{ power_threshold }}'
+
+      - service: zwave_js.set_config_parameter
+        target:
+          entity_id: '{{ entity_id }}'
+        data:
+          parameter: 'Energy reports'
+          value: 1
+
+      - service: zwave_js.set_config_parameter
+        target:
+          entity_id: '{{ entity_id }}'
+        data:
+          parameter: 'Periodic power reports'
+          value: '{{ report_interval }}'
+
+      - service: zwave_js.set_config_parameter
+        target:
+          entity_id: '{{ entity_id }}'
+        data:
+          parameter: 'Periodic energy reports'
+          value: '{{ report_interval }}'
+
+  zwave_config_fibaro_fgs223:
+    alias: 'Z-Wave Configuration for Fibaro Switch (FGS223)'
+    variables:
+      power_threshold: 15
+      report_interval: 600
+    sequence:
+      - service: zwave_js.set_config_parameter
+        target:
+          entity_id: '{{ entity_id }}'
+        data:
+          parameter: 'First Channel - Power Reports: Threshold'
+          value: '{{ power_threshold }}'
+
+      - service: zwave_js.set_config_parameter
+        target:
+          entity_id: '{{ entity_id }}'
+        data:
+          parameter: 'First Channel - Energy Reports: Threshold'
+          value: 1
+
+      - service: zwave_js.set_config_parameter
+        target:
+          entity_id: '{{ entity_id }}'
+        data:
+          parameter: 'Second Channel - Power Reports: Threshold'
+          value: '{{ power_threshold }}'
+
+      - service: zwave_js.set_config_parameter
+        target:
+          entity_id: '{{ entity_id }}'
+        data:
+          parameter: 'Second Channel - Energy Reports: Threshold'
+          value: 1
+
+      - service: zwave_js.set_config_parameter
+        target:
+          entity_id: '{{ entity_id }}'
+        data:
+          parameter: 'Periodic Active Power Reports'
+          value: '{{ report_interval }}'
+
+      - service: zwave_js.set_config_parameter
+        target:
+          entity_id: '{{ entity_id }}'
+        data:
+          parameter: 'Periodic Energy Reports'
+          value: '{{ report_interval }}'
+
+  zwave_config_fibaro_fgwp102:
+    alias: 'Z-Wave Configuration for Fibaro Wall Plug (FGWP102)'
+    variables:
+      power_threshold: 15
+      report_interval: 600
+    sequence:
+      - service: zwave_js.set_config_parameter
+        target:
+          entity_id: '{{ entity_id }}'
+        data:
+          parameter: 'High priority power report'
+          value: 100
+
+      - service: zwave_js.set_config_parameter
+        target:
+          entity_id: '{{ entity_id }}'
+        data:
+          parameter: 'Standard power report'
+          value: '{{ power_threshold }}'
+
+      - service: zwave_js.set_config_parameter
+        target:
+          entity_id: '{{ entity_id }}'
+        data:
+          parameter: 'Energy reporting threshold'
+          value: 1
+
+      - service: zwave_js.set_config_parameter
+        target:
+          entity_id: '{{ entity_id }}'
+        data:
+          parameter: 'Power and energy periodic reports'
+          value: '{{ report_interval }}'
+
+      - service: zwave_js.set_config_parameter
+        target:
+          entity_id: '{{ entity_id }}'
+        data:
+          parameter: 'LED ring colour (device is ON)'
+          value: 'illumination turned off completely'
+
+      - service: zwave_js.set_config_parameter
+        target:
+          entity_id: '{{ entity_id }}'
+        data:
+          parameter: 'LED ring colour (device is OFF)'
+          value: 'illumination turned off completely'
+
+  zwave_config_qubino_zmnhydx:
+    alias: 'Z-Wave Configuration for Qubino Smart Plug 16A (ZMNHYDX)'
+    variables:
+      power_threshold: 0
+      report_interval: 600
+    sequence:
+      - service: zwave_js.set_config_parameter
+        target:
+          entity_id: '{{ entity_id }}'
+        data:
+          parameter: 'Power Consumption (Watt) Reporting Threshold'
+          value: '{{ power_threshold }}'
+
+      - service: zwave_js.set_config_parameter
+        target:
+          entity_id: '{{ entity_id }}'
+        data:
+          parameter: 'Power Consumption (Watt) Reporting Interval'
+          value: '{{ report_interval }}'

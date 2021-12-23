@@ -1,0 +1,17 @@
+script:
+  kids_zwave_config:
+    alias: Kids Z-Wave Config Script
+    sequence:
+      # Kids
+      - service: script.zwave_config_aeotec_zw100
+        entity_id: binary_sensor.kids_motion
+        data:
+          delay: 300
+
+      # Kids Light
+      # - service: script.zwave_config_fibaro_fgs223
+      #   entity_id: switch.kids_light
+
+      # Kids Window
+      - service: script.zwave_config_fibaro_fgdw002
+        entity_id: binary_sensor.kids_window

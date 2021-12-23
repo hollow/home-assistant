@@ -1,0 +1,7 @@
+group:
+  wc_presence:
+    name: WC Presence
+    entities:
+      - binary_sensor.wc_door_opening
+      - binary_sensor.wc_motion
+      - binary_sensor.wc_shower

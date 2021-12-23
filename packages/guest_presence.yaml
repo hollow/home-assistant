@@ -1,0 +1,7 @@
+group:
+  guest_presence:
+    name: Guest Presence
+    entities:
+      - binary_sensor.guest_door_opening
+      - binary_sensor.guest_motion
+      - binary_sensor.guest_remote

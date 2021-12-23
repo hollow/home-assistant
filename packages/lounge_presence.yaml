@@ -1,0 +1,12 @@
+group:
+  lounge_presence:
+    name: Lounge Presence
+    entities:
+      - binary_sensor.lounge_back_motion
+      - binary_sensor.lounge_front_motion
+      - binary_sensor.lounge_remote
+      - binary_sensor.lounge_firetv
+      - binary_sensor.lounge_sonos
+      - binary_sensor.lounge_av
+      - media_player.lounge_av
+      - media_player.lounge_tv

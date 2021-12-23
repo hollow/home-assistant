@@ -1,0 +1,53 @@
+group:
+  gallery_lights:
+    name: Gallery Lights
+    entities:
+      - light.gallery_kids
+      - light.gallery_playground
+      - light.gallery_stairs
+
+adaptive_lighting:
+  - name: Gallery
+    lights: group.gallery_lights
+    min_brightness: 33
+
+sensor:
+  - platform: powercalc
+    name: Gallery Kids Light
+    entity_id: light.gallery_kids
+
+  - platform: powercalc
+    name: Gallery Playground Light
+    entity_id: light.gallery_playground
+    linear:
+      min_power: 0.5
+      max_power: 20.0
+
+  - platform: powercalc
+    name: Gallery Stairs Light
+    entity_id: light.gallery_stairs
+
+automation:
+  - alias: Gallery Kids Light Controller
+    id: gallery_kids_light_controller
+    use_blueprint:
+      path: entity_controller.yaml
+      input:
+        sensor_entity: group.gallery_kids_presence
+        control_entity: light.gallery_kids
+
+  - alias: Gallery Playground Light Controller
+    id: gallery_playground_light_controller
+    use_blueprint:
+      path: entity_controller.yaml
+      input:
+        sensor_entity: group.gallery_playground_presence
+        control_entity: light.gallery_playground
+
+  - alias: Gallery Stairs Light Controller
+    id: gallery_stairs_light_controller
+    use_blueprint:
+      path: entity_controller.yaml
+      input:
+        sensor_entity: group.gallery_stairs_presence
+        control_entity: light.gallery_stairs

@@ -1,0 +1,5 @@
+template:
+  - binary_sensor:
+      - name: WC Shower
+        unique_id: wc_shower
+        state: "{{ states('sensor.wc_humidity') | float(0) > 75 }}"

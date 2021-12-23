@@ -1,0 +1,23 @@
+script:
+  lounge_zwave_config:
+    alias: Lounge Z-Wave Config Script
+    sequence:
+      # Lounge AV
+      - service: script.zwave_config_fibaro_fgwp102
+        entity_id: switch.lounge_av
+
+      # Lounge Back
+      - service: script.zwave_config_fibaro_fgms001
+        entity_id: binary_sensor.lounge_back_motion
+        data:
+          delay: 900
+
+      # Lounge Charger
+      - service: script.zwave_config_fibaro_fgwp102
+        entity_id: switch.lounge_charger
+
+      # Lounge Front
+      - service: script.zwave_config_fibaro_fgms001
+        entity_id: binary_sensor.lounge_front_motion
+        data:
+          delay: 900

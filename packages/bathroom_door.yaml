@@ -1,0 +1,10 @@
+template:
+  - binary_sensor:
+      - name: Bathroom Door Opening
+        unique_id: bathroom_door_opening
+        state: 'on'
+        auto_off: 30
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.bathroom_door
+        to: 'on'

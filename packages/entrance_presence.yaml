@@ -1,0 +1,47 @@
+group:
+  entrance_presence:
+    name: Entrance Presence
+    entities:
+      - group.entrance_back_presence
+      - group.entrance_front_presence
+      - group.entrance_kitchen_presence
+      - group.entrance_middle_presence
+      - group.entrance_stairs_presence
+
+  entrance_back_presence:
+    name: Entrance Back Presence
+    entities:
+      - binary_sensor.entrance_back_motion
+      - binary_sensor.entrance_middle_motion
+      - group.bathroom_presence
+
+  entrance_front_presence:
+    name: Entrance Front Presence
+    entities:
+      - binary_sensor.entrance_door
+      - binary_sensor.entrance_front_motion
+      - binary_sensor.entrance_kitchen_motion
+      - binary_sensor.entrance_middle_motion
+      - binary_sensor.entrance_stairs_motion
+      - group.wc_presence
+
+  entrance_kitchen_presence:
+    name: Entrance Kitchen Presence
+    entities:
+      - binary_sensor.entrance_front_motion
+      - binary_sensor.entrance_kitchen_motion
+      - group.kitchen_presence
+
+  entrance_middle_presence:
+    name: Entrance Middle Presence
+    entities:
+      - binary_sensor.entrance_back_motion
+      - binary_sensor.entrance_front_motion
+      - binary_sensor.entrance_middle_motion
+
+  entrance_stairs_presence:
+    name: Entrance Stairs Presence
+    entities:
+      - binary_sensor.entrance_front_motion
+      - binary_sensor.entrance_stairs_motion
+      - binary_sensor.gallery_stairs_motion

@@ -1,0 +1,16 @@
+template:
+  - sensor:
+      - name: Gallery Thermostat Temperature
+        unique_id: gallery_thermostat_temperature
+        device_class: temperature
+        state_class: measurement
+        unit_of_measurement: °C
+        state: "{{ state_attr('climate.gallery', 'current_temperature') }}"
+
+  - sensor:
+      - name: Gallery Temperature
+        unique_id: gallery_temperature
+        device_class: temperature
+        state_class: measurement
+        unit_of_measurement: °C
+        state: "{{ states('sensor.gallery_playground_temperature') }}"

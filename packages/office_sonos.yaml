@@ -1,0 +1,5 @@
+template:
+  - binary_sensor:
+      - name: Office Sonos
+        unique_id: office_sonos
+        state: "{{ is_state('media_player.office_sonos', 'playing') }}"

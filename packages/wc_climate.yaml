@@ -1,0 +1,8 @@
+template:
+  - sensor:
+      - name: WC Thermostat Temperature
+        unique_id: wc_thermostat_temperature
+        device_class: temperature
+        state_class: measurement
+        unit_of_measurement: °C
+        state: "{{ state_attr('climate.wc', 'current_temperature') }}"

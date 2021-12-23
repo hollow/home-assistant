@@ -1,0 +1,14 @@
+template:
+  - binary_sensor:
+      - name: Laeticia Sonos
+        unique_id: laeticia_sonos
+        state: "{{ is_state('media_player.laeticia_sonos', 'playing') }}"
+
+sensor:
+  - platform: powercalc
+    entity_id: media_player.laeticia_sonos
+    fixed:
+      states_power:
+        playing: 4.2
+        paused: 3.5
+        idle: 3.5

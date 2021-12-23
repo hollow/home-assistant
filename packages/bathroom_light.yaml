@@ -1,0 +1,15 @@
+group:
+  bathroom_lights:
+    name: Bathroom Lights
+    entities:
+      - switch.bathroom_ceiling_light
+      - switch.bathroom_mirror_light
+
+automation:
+  - alias: Bathroom Light Controller
+    id: bathroom_light_controller
+    use_blueprint:
+      path: entity_controller.yaml
+      input:
+        sensor_entity: group.bathroom_presence
+        control_entity: group.bathroom_lights

@@ -1,0 +1,23 @@
+script:
+  bathroom_zwave_config:
+    alias: Bathroom Z-Wave Config Script
+    sequence:
+      # Bathroom
+      - service: script.zwave_config_aeotec_zw100
+        entity_id: binary_sensor.bathroom_motion
+        data:
+          delay: 300
+
+      # Bathroom Door
+      - service: script.zwave_config_fibaro_fgdw002
+        entity_id: binary_sensor.bathroom_door
+
+      # Bathroom Floor
+
+      # Bathroom Light
+      - service: script.zwave_config_fibaro_fgs223
+        entity_id: switch.bathroom_ceiling_light
+
+      # Bathroom Window
+      - service: script.zwave_config_fibaro_fgdw002
+        entity_id: binary_sensor.bathroom_window

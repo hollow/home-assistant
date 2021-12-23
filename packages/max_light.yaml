@@ -1,0 +1,65 @@
+group:
+  max_lights:
+    name: Max Lights
+    entities:
+      - light.max_ceiling
+      - light.max_speaker
+
+adaptive_lighting:
+  - name: Max
+    lights: group.max_lights
+    min_brightness: 33
+
+sensor:
+  - platform: powercalc
+    name: Max Ceiling Light
+    entity_id: light.max_ceiling
+
+  - platform: powercalc
+    name: Max Speaker Light
+    entity_id: light.max_speaker
+    linear:
+      min_power: 0.5
+      max_power: 5.3
+
+script:
+  max_ceiling_light_sunrise:
+    alias: Max Ceiling Light Sunrise
+    use_blueprint:
+      path: light_sunrise.yaml
+      input:
+        entity: light.max_ceiling
+        duration: 15
+
+  max_ceiling_light_sunset:
+    alias: Max Ceiling Light Sunset
+    use_blueprint:
+      path: light_sunset.yaml
+      input:
+        entity: light.max_ceiling
+        duration: 15
+
+  max_speaker_light_sunrise:
+    alias: Max Speaker Light Sunrise
+    use_blueprint:
+      path: light_sunrise.yaml
+      input:
+        entity: light.max_speaker
+        duration: 15
+
+  max_speaker_light_sunset:
+    alias: Max Speaker Light Sunset
+    use_blueprint:
+      path: light_sunset.yaml
+      input:
+        entity: light.max_speaker
+        duration: 15
+
+automation:
+  - alias: Max Light Controller
+    id: max_light_controller
+    use_blueprint:
+      path: entity_controller.yaml
+      input:
+        sensor_entity: group.max_presence
+        control_entity: group.max_lights

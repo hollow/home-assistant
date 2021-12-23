@@ -1,0 +1,5 @@
+group:
+  closet_presence:
+    name: Closet Presence
+    entities:
+      - binary_sensor.closet_motion

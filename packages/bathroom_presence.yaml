@@ -1,0 +1,8 @@
+group:
+  bathroom_presence:
+    name: Bathroom Presence
+    entities:
+      - binary_sensor.bathroom_door_opening
+      - binary_sensor.bathroom_motion
+      - binary_sensor.bathroom_shower
+      - binary_sensor.bathroom_sonos

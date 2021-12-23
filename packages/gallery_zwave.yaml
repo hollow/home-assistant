@@ -1,0 +1,35 @@
+script:
+  gallery_zwave_config:
+    alias: Gallery Z-Wave Config Script
+    sequence:
+      # Gallery Closet
+      - service: script.zwave_config_fibaro_fgms001
+        entity_id: binary_sensor.gallery_closet_motion
+        data:
+          delay: 900
+
+      # Gallery Fan
+      - service: script.zwave_config_fibaro_fgwp102
+        entity_id: switch.gallery_fan
+
+      # Gallery Kids
+      - service: script.zwave_config_fibaro_fgms001
+        entity_id: binary_sensor.gallery_kids_motion
+
+      # Gallery Left Window
+      - service: script.zwave_config_fibaro_fgdw002
+        entity_id: binary_sensor.gallery_left_window
+
+      # Gallery Playground
+      - service: script.zwave_config_fibaro_fgms001
+        entity_id: binary_sensor.gallery_playground_motion
+        data:
+          delay: 900
+
+      # Gallery Right Window
+      - service: script.zwave_config_fibaro_fgdw002
+        entity_id: binary_sensor.gallery_right_window
+
+      # Gallery Stairs
+      - service: script.zwave_config_fibaro_fgms001
+        entity_id: binary_sensor.gallery_stairs_motion

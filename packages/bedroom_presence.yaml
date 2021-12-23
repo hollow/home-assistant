@@ -1,0 +1,7 @@
+group:
+  bedroom_presence:
+    name: Bedroom Presence
+    entities:
+      - binary_sensor.bedroom_door_opening
+      - binary_sensor.bedroom_motion
+      - binary_sensor.bedroom_remote

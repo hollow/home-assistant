@@ -1,0 +1,17 @@
+script:
+  guest_zwave_config:
+    alias: Guest Z-Wave Config Script
+    sequence:
+      # Guest
+      - service: script.zwave_config_fibaro_fgms001
+        entity_id: binary_sensor.guest_motion
+        data:
+          delay: 300
+
+      # Guest Ceiling Light
+      - service: script.zwave_config_fibaro_fgs213
+        entity_id: switch.guest_ceiling_light
+
+      # Guest Door
+      - service: script.zwave_config_fibaro_fgdw002
+        entity_id: binary_sensor.guest_door

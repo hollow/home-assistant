@@ -1,0 +1,45 @@
+script:
+  office_zwave_config:
+    alias: Office Z-Wave Config Script
+    sequence:
+      # Office Bene
+      - service: script.zwave_config_fibaro_fgms001
+        entity_id: binary_sensor.office_bene_motion
+        data:
+          delay: 300
+
+      # Office Bene
+      - service: script.zwave_config_fibaro_fgwp102
+        entity_id: switch.office_bene
+
+      # Office Ceiling Light
+      - service: script.zwave_config_fibaro_fgs223
+        entity_id: switch.office_back_light
+
+      # Office Charger
+      - service: script.zwave_config_fibaro_fgwp102
+        entity_id: switch.office_charger
+
+      # Office Fan
+      - service: script.zwave_config_aeotec_zw175
+        entity_id: switch.office_fan
+
+      # Office Kids
+      - service: script.zwave_config_fibaro_fgms001
+        entity_id: binary_sensor.office_kids_motion
+        data:
+          delay: 300
+
+      # Office Kids
+      - service: script.zwave_config_fibaro_fgwp102
+        entity_id: switch.office_kids
+
+      # Office Tizzi
+      - service: script.zwave_config_fibaro_fgms001
+        entity_id: binary_sensor.office_tizzi_motion
+        data:
+          delay: 300
+
+      # Office Tizzi
+      - service: script.zwave_config_fibaro_fgwp102
+        entity_id: switch.office_tizzi

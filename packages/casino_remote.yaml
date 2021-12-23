@@ -1,0 +1,12 @@
+template:
+  - binary_sensor:
+      - name: Casino Remote
+        unique_id: casino_remote
+        state: 'on'
+        auto_off: 30
+    trigger:
+      - platform: event
+        event_type: zha_event
+        event_data:
+          device_ieee: '00:17:88:01:08:6f:b8:b9'
+          endpoint_id: 2

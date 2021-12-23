@@ -1,0 +1,8 @@
+template:
+  - sensor:
+      - name: Laeticia Thermostat Temperature
+        unique_id: laeticia_thermostat_temperature
+        device_class: temperature
+        state_class: measurement
+        unit_of_measurement: °C
+        state: "{{ state_attr('climate.laeticia', 'current_temperature') }}"

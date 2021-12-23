@@ -1,0 +1,13 @@
+script:
+  casino_zwave_config:
+    alias: Casino Z-Wave Config Script
+    sequence:
+      # Casino
+      - service: script.zwave_config_fibaro_fgms001
+        entity_id: binary_sensor.casino_motion
+        data:
+          delay: 300
+
+      # Casino Devices
+      - service: script.zwave_config_fibaro_fgwp102
+        entity_id: switch.casino_devices

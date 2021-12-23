@@ -1,0 +1,14 @@
+group:
+  wc_lights:
+    name: WC Lights
+    entities:
+      - switch.wc_light
+
+automation:
+  - alias: WC Light Controller
+    id: wc_light_controller
+    use_blueprint:
+      path: entity_controller.yaml
+      input:
+        sensor_entity: group.wc_presence
+        control_entity: group.wc_lights

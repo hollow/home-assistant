@@ -1,0 +1,17 @@
+script:
+  max_zwave_config:
+    alias: Max Z-Wave Config Script
+    sequence:
+      # Max
+      - service: script.zwave_config_fibaro_fgms001
+        entity_id: binary_sensor.max_motion
+        data:
+          delay: 300
+
+      # Max Large Window
+      - service: script.zwave_config_fibaro_fgdw002
+        entity_id: binary_sensor.max_large_window
+
+      # Max Small Window
+      - service: script.zwave_config_fibaro_fgdw002
+        entity_id: binary_sensor.max_small_window

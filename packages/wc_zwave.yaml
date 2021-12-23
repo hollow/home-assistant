@@ -1,0 +1,19 @@
+script:
+  wc_zwave_config:
+    alias: WC Z-Wave Config Script
+    sequence:
+      # WC
+      - service: script.zwave_config_aeotec_zw100
+        entity_id: binary_sensor.wc_motion
+        data:
+          delay: 300
+
+      # WC Ceiling Light
+      - service: script.zwave_config_fibaro_fgs223
+        entity_id: switch.wc_light
+
+      # WC Door
+      - service: script.zwave_config_fibaro_fgdw002
+        entity_id: binary_sensor.wc_door
+
+      # WC Floor

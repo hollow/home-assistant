@@ -1,0 +1,7 @@
+group:
+  kitchen_presence:
+    name: Kitchen Presence
+    entities:
+      - binary_sensor.entrance_kitchen_motion
+      - binary_sensor.kitchen_motion
+      - binary_sensor.kitchen_sonos

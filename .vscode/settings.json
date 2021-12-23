@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "*.yaml": "home-assistant"
+    },
+    "files.exclude": {
+        "*.db*": true,
+        "*.log*": true,
+    },
+    "files.watcherExclude": {
+        "*.db*": true,
+        "*.log*": true,
+    },
+}

@@ -1,0 +1,92 @@
+media_player:
+  - name: Lounge AV
+    platform: onkyo
+    host: 10.0.0.80
+    scan_interval: 3
+    max_volume: 100
+    receiver_max_volume: 100
+    sources:
+      strm-box: FireTV
+      cd: Sonos
+      tv: Traktor S5
+      game: Switch
+      dvd: Xbox
+      cbl: SNES
+      pc: PC
+      aux1: AUX
+
+binary_sensor:
+  - name: Lounge AV Connectivity
+    platform: ping
+    host: lounge-av
+    scan_interval: 10
+    count: 1
+
+template:
+  - binary_sensor:
+      - name: Lounge AV
+        unique_id: lounge_av
+        state: >
+          {{
+            is_state('media_player.lounge_av', 'on') and (
+              is_state('binary_sensor.lounge_firetv', 'on') or
+              is_state('binary_sensor.lounge_sonos', 'on') or
+              states('select.lounge_av_source') not in ['FireTV', 'Sonos', 'off']
+            )
+          }}
+
+  - select:
+      name: Lounge AV Source
+      unique_id: lounge_av_source
+      availability: "{{ state_attr('media_player.lounge_av', 'source_list') != None }}"
+      options: "{{ state_attr('media_player.lounge_av', 'source_list') + ['off'] }}"
+      state: >
+        {%- if is_state('media_player.lounge_av', 'off') -%} off
+        {%- else -%} {{ state_attr('media_player.lounge_av', 'source') }}
+        {%- endif -%}
+      select_option:
+        service: script.lounge_av_source_select
+        data:
+          source: "{{ option }}"
+
+script:
+  lounge_av_source_select:
+    alias: Lounge AV Source Select
+    mode: restart
+    sequence:
+      - service: script.lounge_av_turn_on
+      - service: media_player.select_source
+        entity_id: media_player.lounge_av
+        data:
+          source: '{{ source }}'
+
+  lounge_av_turn_on:
+    alias: Lounge AV Turn On
+    mode: restart
+    sequence:
+      - service: switch.turn_on
+        entity_id: switch.lounge_av
+      - wait_template: "{{ is_state('binary_sensor.lounge_av_connectivity', 'on') }}"
+      - service: media_player.turn_on
+        entity_id: media_player.lounge_av
+      - wait_template: "{{ is_state('media_player.lounge_av', 'on') }}"
+
+automation:
+  - alias: Lounge AV Switch Controller
+    id: lounge_av_switch_controller
+    use_blueprint:
+      path: entity_controller.yaml
+      input:
+        sensor_entity: group.lounge_presence
+        control_entity: switch.lounge_av
+
+  - alias: Lounge AV Turn Off
+    id: lounge_av_turn_off
+    mode: restart
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.lounge_av
+        to: 'off'
+    action:
+      - service: media_player.turn_off
+        entity_id: media_player.lounge_av

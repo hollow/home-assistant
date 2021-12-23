@@ -1,0 +1,21 @@
+group:
+  office_lights:
+    name: Office Light
+    entities:
+      - switch.office_back_light
+      - switch.office_front_light
+      - light.office_middle
+
+sensor:
+  - platform: powercalc
+    name: Office Middle Light
+    entity_id: light.office_middle
+
+automation:
+  - alias: Office Light Controller
+    id: office_light_controller
+    use_blueprint:
+      path: entity_controller.yaml
+      input:
+        sensor_entity: group.office_presence
+        control_entity: group.office_lights

@@ -1,0 +1,35 @@
+group:
+  office_switches:
+    name: Office Switches
+    entities:
+     - switch.office_bene
+     - switch.office_kids
+     - switch.office_tizzi
+
+template:
+  - binary_sensor:
+      - name: Office Bene Desk
+        unique_id: office_bene_desk
+        state: "{{ states('sensor.office_bene_power') | float(0) > 50 }}"
+        delay_off: 300
+
+  - binary_sensor:
+      - name: Office Kids Desk
+        unique_id: office_kids_desk
+        state: "{{ states('sensor.office_kids_power') | float(0) > 50 }}"
+        delay_off: 300
+
+  - binary_sensor:
+      - name: Office Tizzi Desk
+        unique_id: office_tizzi_desk
+        state: "{{ states('sensor.office_tizzi_power') | float(0) > 50 }}"
+        delay_off: 300
+
+automation:
+  - alias: Office Switch Controller
+    id: office_switch_controller
+    use_blueprint:
+      path: entity_controller.yaml
+      input:
+        sensor_entity: group.office_presence
+        control_entity: group.office_switches

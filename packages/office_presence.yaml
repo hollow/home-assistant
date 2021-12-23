@@ -1,0 +1,12 @@
+group:
+  office_presence:
+    name: Office Presence
+    entities:
+      - binary_sensor.office_bene_desk
+      - binary_sensor.office_bene_motion
+      - binary_sensor.office_kids_desk
+      - binary_sensor.office_kids_motion
+      - binary_sensor.office_remote
+      - binary_sensor.office_sonos
+      - binary_sensor.office_tizzi_desk
+      - binary_sensor.office_tizzi_motion

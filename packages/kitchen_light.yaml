@@ -1,0 +1,16 @@
+group:
+  kitchen_lights:
+    name: Kitchen Lights
+    entities:
+      - switch.kitchen_back_light
+      - switch.kitchen_front_light
+      - switch.kitchen_fume_light
+
+automation:
+  - alias: Kitchen Light Controller
+    id: kitchen_light_controller
+    use_blueprint:
+      path: entity_controller.yaml
+      input:
+        sensor_entity: group.kitchen_presence
+        control_entity: group.kitchen_lights

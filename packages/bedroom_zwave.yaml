@@ -1,0 +1,13 @@
+script:
+  bedroom_zwave_config:
+    alias: Bedroom Z-Wave Config Script
+    sequence:
+      # Bedroom
+      - service: script.zwave_config_fibaro_fgms001
+        entity_id: binary_sensor.bedroom_motion
+        data:
+          delay: 300
+
+      # Bedroom Door
+      - service: script.zwave_config_fibaro_fgdw002
+        entity_id: binary_sensor.bedroom_door
