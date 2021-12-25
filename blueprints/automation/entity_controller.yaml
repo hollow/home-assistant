@@ -12,7 +12,7 @@ blueprint:
     control_entity:
       name: Control Entity
       selector:
-        target: {}
+        entity: {}
 
 mode: restart
 max_exceeded: silent
@@ -20,6 +20,10 @@ max_exceeded: silent
 variables:
   sensor_entity: !input sensor_entity
   control_entity: !input control_entity
+  entities: >
+    {%- set groups = expand(control_entity) | selectattr('attributes.entity_id', 'defined') | map(attribute='attributes.entity_id') -%}
+    {%- set others = expand(control_entity) | rejectattr('attributes.entity_id', 'defined') | map(attribute='entity_id') -%}
+    {{ expand([groups, others]) | map(attribute='entity_id') | list }}
 
 trigger:
   - platform: state
@@ -40,7 +44,7 @@ action:
                 - variables:
                     entities: >
                       {{
-                        expand(control_entity) |
+                        expand(entities) |
                         selectattr('state', 'eq', 'on') |
                         map(attribute='entity_id') |
                         list
@@ -55,7 +59,7 @@ action:
                 - condition: template
                   value_template: >
                     {{
-                      expand(control_entity) |
+                      expand(entities) |
                       selectattr('state', 'eq', 'on') |
                       map(attribute='entity_id') |
                       list | count == 0
@@ -66,7 +70,7 @@ action:
             - variables:
                 entities: >
                   {{
-                    expand(control_entity) |
+                    expand(entities) |
                     selectattr('state', 'eq', 'off') |
                     map(attribute='entity_id') |
                     list
@@ -81,7 +85,7 @@ action:
             - condition: template
               value_template: >
                 {{
-                  expand(control_entity) |
+                  expand(entities) |
                   selectattr('state', 'eq', 'off') |
                   map(attribute='entity_id') |
                   list | count == 0
