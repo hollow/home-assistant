@@ -1,13 +1,16 @@
-group:
-  laeticia_lights:
-    name: Laeticia Lights
+light:
+  - platform: group
+    unique_id: laeticia
+    name: Laeticia Light
     entities:
       - light.laeticia_ceiling
       - light.laeticia_speaker
 
 adaptive_lighting:
   - name: Laeticia
-    lights: group.laeticia_lights
+    lights:
+      - light.laeticia_ceiling
+      - light.laeticia_speaker
     min_brightness: 33
 
 sensor:
@@ -62,4 +65,4 @@ automation:
       path: entity_controller.yaml
       input:
         sensor_entity: group.laeticia_presence
-        control_entity: group.laeticia_lights
+        control_entity: light.laeticia

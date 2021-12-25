@@ -1,13 +1,16 @@
-group:
-  max_lights:
-    name: Max Lights
+light:
+  - platform: group
+    unique_id: max
+    name: Max Light
     entities:
       - light.max_ceiling
       - light.max_speaker
 
 adaptive_lighting:
   - name: Max
-    lights: group.max_lights
+    lights:
+      - light.max_ceiling
+      - light.max_speaker
     min_brightness: 33
 
 sensor:
@@ -18,9 +21,6 @@ sensor:
   - platform: powercalc
     name: Max Speaker Light
     entity_id: light.max_speaker
-    linear:
-      min_power: 0.5
-      max_power: 5.3
 
 script:
   max_ceiling_light_sunrise:
@@ -62,4 +62,4 @@ automation:
       path: entity_controller.yaml
       input:
         sensor_entity: group.max_presence
-        control_entity: group.max_lights
+        control_entity: light.max

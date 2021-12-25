@@ -1,6 +1,7 @@
-group:
-  gallery_lights:
-    name: Gallery Lights
+light:
+  - platform: group
+    unique_id: gallery
+    name: Gallery Light
     entities:
       - light.gallery_kids
       - light.gallery_playground
@@ -8,7 +9,10 @@ group:
 
 adaptive_lighting:
   - name: Gallery
-    lights: group.gallery_lights
+    lights:
+      - light.gallery_kids
+      - light.gallery_playground
+      - light.gallery_stairs
     min_brightness: 33
 
 sensor:

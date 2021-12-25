@@ -1,18 +1,20 @@
-group:
-  casino_lights:
-    name: Casino Lights
+light:
+  - platform: group
+    unique_id: casino
+    name: Casino Light
     entities:
-      - light.casino
+      - light.casino_ceiling
 
 adaptive_lighting:
   - name: Casino
-    lights: group.casino_lights
+    lights:
+      - light.casino_ceiling
     min_brightness: 75
 
 sensor:
   - platform: powercalc
-    name: Casino Light
-    entity_id: light.casino
+    name: Casino Ceiling Light
+    entity_id: light.casino_ceiling
     linear:
       min_power: 0.5
       max_power: 46.5
@@ -24,4 +26,4 @@ automation:
       path: entity_controller.yaml
       input:
         sensor_entity: group.casino_presence
-        control_entity: group.casino_lights
+        control_entity: light.casino

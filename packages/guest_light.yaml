@@ -1,8 +1,13 @@
-group:
-  guest_lights:
-    name: Guest Lights
+light:
+  - platform: group
+    unique_id: guest
+    name: Guest Light
     entities:
-      - switch.guest_light
+      - light.guest_ceiling
+
+  - platform: switch
+    name: Guest Ceiling Light
+    entity_id: switch.guest_ceiling_light
 
 automation:
   - alias: Guest Light Controller
@@ -11,4 +16,4 @@ automation:
       path: entity_controller.yaml
       input:
         sensor_entity: group.guest_presence
-        control_entity: group.guest_lights
+        control_entity: light.guest

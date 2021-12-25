@@ -1,13 +1,14 @@
-group:
-  closet_lights:
-    name: Closet Lights
+light:
+  - platform: group
+    unique_id: closet
+    name: Closet Light
     entities:
-      - light.closet
+      - light.closet_ceiling
 
 sensor:
   - platform: powercalc
-    name: Closet Light
-    entity_id: light.closet
+    name: Closet Ceiling Light
+    entity_id: light.closet_ceiling
 
 automation:
   - alias: Closet Light Controller
@@ -16,4 +17,4 @@ automation:
       path: entity_controller.yaml
       input:
         sensor_entity: group.closet_presence
-        control_entity: group.closet_lights
+        control_entity: light.closet

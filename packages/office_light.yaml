@@ -1,10 +1,19 @@
-group:
-  office_lights:
+light:
+  - platform: group
+    unique_id: office
     name: Office Light
     entities:
-      - switch.office_back_light
-      - switch.office_front_light
+      - light.office_back
+      - light.office_front
       - light.office_middle
+
+  - platform: switch
+    name: Office Back Light
+    entity_id: switch.office_back_light
+
+  - platform: switch
+    name: Office Front Light
+    entity_id: switch.office_front_light
 
 sensor:
   - platform: powercalc
@@ -18,4 +27,4 @@ automation:
       path: entity_controller.yaml
       input:
         sensor_entity: group.office_presence
-        control_entity: group.office_lights
+        control_entity: light.office

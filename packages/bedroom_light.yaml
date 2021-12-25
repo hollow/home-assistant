@@ -1,13 +1,16 @@
-group:
-  bedroom_lights:
-    name: Bedroom Lights
+light:
+  - platform: group
+    unique_id: bedroom
+    name: Bedroom Light
     entities:
       - light.bedroom_bed
       - light.bedroom_ceiling
 
 adaptive_lighting:
   - name: Bedroom
-    lights: group.bedroom_lights
+    lights:
+      - light.bedroom_bed
+      - light.bedroom_ceiling
     min_brightness: 33
 
 sensor:
@@ -62,4 +65,4 @@ automation:
       path: entity_controller.yaml
       input:
         sensor_entity: group.bedroom_presence
-        control_entity: group.bedroom_lights
+        control_entity: light.bedroom

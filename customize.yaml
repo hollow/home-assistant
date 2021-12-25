@@ -51,9 +51,6 @@ climate.*_thermostat:
 device_tracker.*_phone:
   icon: mdi:cellphone
 
-group.*_lights:
-  icon: mdi:lightbulb-group
-
 group.*_presence:
   icon: mdi:location-enter
 

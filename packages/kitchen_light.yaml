@@ -1,10 +1,23 @@
-group:
-  kitchen_lights:
-    name: Kitchen Lights
+light:
+  - platform: group
+    unique_id: kitchen
+    name: Kitchen Light
     entities:
-      - switch.kitchen_back_light
-      - switch.kitchen_front_light
-      - switch.kitchen_fume_light
+      - light.kitchen_back
+      - light.kitchen_front
+      - light.kitchen_fume
+
+  - platform: switch
+    name: Kitchen Back Light
+    entity_id: switch.kitchen_back_light
+
+  - platform: switch
+    name: Kitchen Front Light
+    entity_id: switch.kitchen_front_light
+
+  - platform: switch
+    name: Kitchen Fume Light
+    entity_id: switch.kitchen_fume_light
 
 automation:
   - alias: Kitchen Light Controller
@@ -13,4 +26,4 @@ automation:
       path: entity_controller.yaml
       input:
         sensor_entity: group.kitchen_presence
-        control_entity: group.kitchen_lights
+        control_entity: light.kitchen

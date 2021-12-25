@@ -1,11 +1,16 @@
-group:
-  lounge_lights:
-    name: Lounge Lights
+light:
+  - platform: group
+    unique_id: lounge
+    name: Lounge Light
     entities:
       - light.lounge_back
       - light.lounge_ceiling
-      - switch.lounge_glitter
+      - light.lounge_glitter
       - light.lounge_tv
+
+  - platform: switch
+    name: Lounge Glitter Light
+    entity_id: switch.lounge_glitter_light
 
 adaptive_lighting:
   - name: Lounge Ambient

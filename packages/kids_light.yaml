@@ -1,13 +1,19 @@
-group:
-  kids_lights:
-    name: Kids Lights
+light:
+  - platform: group
+    unique_id: kids
+    name: Kids Light
     entities:
-      - light.kids
+      - light.kids_ceiling
+
+adaptive_lighting:
+  - name: Kids
+    lights: light.kids
+    min_brightness: 50
 
 sensor:
   - platform: powercalc
-    name: Kids Light
-    entity_id: light.kids
+    name: Kids Ceiling Light
+    entity_id: light.kids_ceiling
 
 automation:
   - alias: Kids Light Controller
@@ -16,4 +22,4 @@ automation:
       path: entity_controller.yaml
       input:
         sensor_entity: group.kids_presence
-        control_entity: group.kids_lights
+        control_entity: light.kids

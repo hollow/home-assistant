@@ -1,8 +1,13 @@
-group:
-  wc_lights:
-    name: WC Lights
+light:
+  - platform: group
+    unique_id: wc
+    name: WC Light
     entities:
-      - switch.wc_light
+      - light.wc_ceiling
+
+  - platform: switch
+    name: WC Ceiling Light
+    entity_id: switch.wc_ceiling_light
 
 automation:
   - alias: WC Light Controller
@@ -11,4 +16,4 @@ automation:
       path: entity_controller.yaml
       input:
         sensor_entity: group.wc_presence
-        control_entity: group.wc_lights
+        control_entity: light.wc

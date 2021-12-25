@@ -1,6 +1,7 @@
-group:
-  entrance_lights:
-    name: Entrance Lights
+light:
+  - platform: group
+    unique_id: entrance
+    name: Entrance Light
     entities:
       - light.entrance_back
       - light.entrance_front
@@ -10,7 +11,12 @@ group:
 
 adaptive_lighting:
   - name: Entrance
-    lights: group.entrance_lights
+    lights:
+      - light.entrance_back
+      - light.entrance_front
+      - light.entrance_kitchen
+      - light.entrance_middle
+      - light.entrance_stairs
     min_brightness: 33
 
 sensor:

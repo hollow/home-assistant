@@ -1,9 +1,18 @@
-group:
-  bathroom_lights:
-    name: Bathroom Lights
+light:
+  - platform: group
+    unique_id: bathroom
+    name: Bathroom Light
     entities:
-      - switch.bathroom_ceiling_light
-      - switch.bathroom_mirror_light
+      - light.bathroom_ceiling
+      - light.bathroom_mirror
+
+  - platform: switch
+    name: Bathroom Ceiling Light
+    entity_id: switch.bathroom_ceiling_light
+
+  - platform: switch
+    name: Bathroom Mirror Light
+    entity_id: switch.bathroom_mirror_light
 
 automation:
   - alias: Bathroom Light Controller
@@ -12,4 +21,4 @@ automation:
       path: entity_controller.yaml
       input:
         sensor_entity: group.bathroom_presence
-        control_entity: group.bathroom_lights
+        control_entity: light.bathroom
