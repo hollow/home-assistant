@@ -9,9 +9,10 @@ fi
 for area_id ($@); do
     echo ">>> checking entities in area '${area_id}'"
     for entity_id ($(ha-orphan-ids "\.${area_id}")); do
-        ha-entity-assign ${entity_id} ${area_id}
+        ha-entity-assign ${entity_id} ${area_id} | \
+        ha-entity-or-error
     done
 done
 
 echo ">>> checking remaining orphans"
-ha-orphans ".*"
+ha-orphan-ids ".*"
