@@ -5,3 +5,4 @@
 *.log*
 backup/
 secrets.yaml
+zwave
