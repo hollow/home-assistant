@@ -4,26 +4,13 @@ blueprint:
   domain: automation
 
   input:
-    sensor_entity:
-      name: Sensor Entity
-      selector:
-        entity: {}
-
     control_entity:
       name: Control Entity
-      selector:
-        entity: {}
+    sensor_entity:
+      name: Sensor Entity
 
 mode: restart
 max_exceeded: silent
-
-variables:
-  sensor_entity: !input sensor_entity
-  control_entity: !input control_entity
-  entities: >
-    {%- set groups = expand(control_entity) | selectattr('attributes.entity_id', 'defined') | map(attribute='attributes.entity_id') -%}
-    {%- set others = expand(control_entity) | rejectattr('attributes.entity_id', 'defined') | map(attribute='entity_id') -%}
-    {{ expand([groups, others]) | map(attribute='entity_id') | list }}
 
 trigger:
   - platform: state
@@ -39,54 +26,8 @@ action:
             entity_id: !input sensor_entity
             state: 'off'
         sequence:
-          - repeat:
-              sequence:
-                - variables:
-                    entities: >
-                      {{
-                        expand(entities) |
-                        selectattr('state', 'eq', 'on') |
-                        map(attribute='entity_id') |
-                        list
-                      }}
-                - condition: template
-                  value_template: "{{ entities | count > 0 }}"
-                - service: homeassistant.turn_off
-                  target:
-                    entity_id: "{{ entities }}"
-                - delay: 10
-              until:
-                - condition: template
-                  value_template: >
-                    {{
-                      expand(entities) |
-                      selectattr('state', 'eq', 'on') |
-                      map(attribute='entity_id') |
-                      list | count == 0
-                    }}
+          - service: homeassistant.turn_off
+            entity_id: !input control_entity
     default:
-      - repeat:
-          sequence:
-            - variables:
-                entities: >
-                  {{
-                    expand(entities) |
-                    selectattr('state', 'eq', 'off') |
-                    map(attribute='entity_id') |
-                    list
-                  }}
-            - condition: template
-              value_template: "{{ entities | count > 0 }}"
-            - service: homeassistant.turn_on
-              target:
-                entity_id: "{{ entities }}"
-            - delay: 10
-          until:
-            - condition: template
-              value_template: >
-                {{
-                  expand(entities) |
-                  selectattr('state', 'eq', 'off') |
-                  map(attribute='entity_id') |
-                  list | count == 0
-                }}
+      - service: homeassistant.turn_on
+        entity_id: !input control_entity
