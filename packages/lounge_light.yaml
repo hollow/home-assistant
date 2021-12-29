@@ -94,3 +94,132 @@ automation:
       input:
         sensor_entity: group.lounge_presence
         control_entity: light.lounge_tv
+
+  - alias: Lounge Light On
+    id: lounge_light_on
+    mode: restart
+    trigger:
+      - platform: event
+        event_type: zha_event
+        event_data:
+          device_ieee: '00:17:88:01:04:ae:f3:37'
+          endpoint_id: 2
+          command: on_short_release
+    action:
+      - service: automation.turn_on
+        target:
+          entity_id:
+            - automation.lounge_back_light_controller
+            - automation.lounge_ceiling_light_controller
+            - automation.lounge_glitter_light_controller
+            - automation.lounge_tv_light_controller
+      - service: automation.trigger
+        target:
+          entity_id:
+            - automation.lounge_back_light_controller
+            - automation.lounge_ceiling_light_controller
+            - automation.lounge_glitter_light_controller
+            - automation.lounge_tv_light_controller
+
+  - alias: Lounge Light Up
+    id: lounge_light_up
+    mode: restart
+    trigger:
+      - platform: event
+        event_type: zha_event
+        event_data:
+          device_ieee: '00:17:88:01:04:ae:f3:37'
+          endpoint_id: 2
+          command: up_short_release
+    action:
+      - choose:
+          - conditions: >
+              {{ is_state('automation.lounge_tv_light_controller', 'off') }}
+            sequence:
+              - service: automation.turn_on
+                entity_id: automation.lounge_tv_light_controller
+              - service: automation.trigger
+                entity_id: automation.lounge_tv_light_controller
+          - conditions: >
+              {{ is_state('automation.lounge_back_light_controller', 'off') }}
+            sequence:
+              - service: automation.turn_on
+                entity_id: automation.lounge_back_light_controller
+              - service: automation.trigger
+                entity_id: automation.lounge_back_light_controller
+          - conditions: >
+              {{ is_state('automation.lounge_glitter_light_controller', 'off') }}
+            sequence:
+              - service: automation.turn_on
+                entity_id: automation.lounge_glitter_light_controller
+              - service: automation.trigger
+                entity_id: automation.lounge_glitter_light_controller
+          - conditions: >
+              {{ is_state('automation.lounge_ceiling_light_controller', 'off') }}
+            sequence:
+              - service: automation.turn_on
+                entity_id: automation.lounge_ceiling_light_controller
+              - service: automation.trigger
+                entity_id: automation.lounge_ceiling_light_controller
+
+  - alias: Lounge Light Down
+    id: lounge_light_down
+    mode: restart
+    trigger:
+      - platform: event
+        event_type: zha_event
+        event_data:
+          device_ieee: '00:17:88:01:04:ae:f3:37'
+          endpoint_id: 2
+          command: down_short_release
+    action:
+      - choose:
+          - conditions: >
+              {{ is_state('automation.lounge_ceiling_light_controller', 'on') }}
+            sequence:
+              - service: automation.turn_off
+                entity_id: automation.lounge_ceiling_light_controller
+              - service: light.turn_off
+                entity_id: light.lounge_ceiling
+          - conditions: >
+              {{ is_state('automation.lounge_glitter_light_controller', 'on') }}
+            sequence:
+              - service: automation.turn_off
+                entity_id: automation.lounge_glitter_light_controller
+              - service: light.turn_off
+                entity_id: light.lounge_glitter
+          - conditions: >
+              {{ is_state('automation.lounge_back_light_controller', 'on') }}
+            sequence:
+              - service: automation.turn_off
+                entity_id: automation.lounge_back_light_controller
+              - service: light.turn_off
+                entity_id: light.lounge_back
+          - conditions: >
+              {{ is_state('automation.lounge_tv_light_controller', 'on') }}
+            sequence:
+              - service: automation.turn_off
+                entity_id: automation.lounge_tv_light_controller
+              - service: light.turn_off
+                entity_id: light.lounge_tv
+
+  - alias: Lounge Light Off
+    id: lounge_light_off
+    mode: restart
+    trigger:
+      - platform: event
+        event_type: zha_event
+        event_data:
+          device_ieee: '00:17:88:01:04:ae:f3:37'
+          endpoint_id: 2
+          command: off_short_release
+    action:
+      - service: automation.turn_off
+        target:
+          entity_id:
+            - automation.lounge_back_light_controller
+            - automation.lounge_ceiling_light_controller
+            - automation.lounge_glitter_light_controller
+            - automation.lounge_tv_light_controller
+      - service: light.turn_off
+        entity_id: light.lounge
